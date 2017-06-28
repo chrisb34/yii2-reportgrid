@@ -1,0 +1,21 @@
+{
+    "name": "chrisb34/yii2-report-grid",
+    "description": "Yii-Framework gridview widget for totalling reports",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","gridview","report","totals"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Chris Backhouse",
+            "email": "support@chris-backhouse.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+    },
+    "autoload": {
+        "psr-4": {
+            "chrisb34\\report-grid\\": ""
+        }
+    }
+}

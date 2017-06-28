@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+table {
+    white-space: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-size: 14px;
+    font-style: normal;
+    color: -internal-quirk-inherit;
+    text-align: start;
+    font-variant: normal normal;
+    background: white;
+    color: #333;
+}
+
+tr.cb-subTotal {
+	font-weight: bold;
+}
+.cb-align-right {
+    text-align: right;
+}
+.cb-sub-total {
+	color: green;
+    font-size: 110%;
+}
+.cb-sub-total-0 {
+    color: blue;
+    background: #FFE979 !important;
+}
+.cb-sub-total-1 {
+    background: #FFF2AB !important;
+}
+.cb-sub-total-2 {
+    background: #fbfbee !important;
+}
+.cb-sub-total-3 {
+    background: #FFEE95 !important;
+}
+.cb-nowrap {
+    white-space: nowrap;
+}
+.cb-grid-hide {
+	display: none;
+}
