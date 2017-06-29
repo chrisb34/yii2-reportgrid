@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "chrisb34\\report-grid\\": ""
+            "chrisb34\\reportgrid\\": ""
         }
     }
 }
