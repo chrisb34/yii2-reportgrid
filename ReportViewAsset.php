@@ -7,7 +7,8 @@
  * @version   1.0.0
  */
 
-namespace common\components\ReportGrid;
+
+namespace chrisb34\ReportGrid;
 
 use yii\web\AssetBundle;
 

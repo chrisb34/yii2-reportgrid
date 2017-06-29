@@ -10,12 +10,10 @@
  * @since 0.1
  */
 
-namespace common\components\ReportGrid;
 
-
+namespace chrisb34\ReportGrid;
 
 use yii\helpers\Html;
-use yii\base\InvalidConfigException;
 
 class ReportColumn extends \yii\grid\DataColumn {
 

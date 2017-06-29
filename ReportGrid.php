@@ -10,7 +10,7 @@
  * @since 0.1
  */
 
-namespace common\components\ReportGrid;
+namespace chrisb34\ReportGrid;
 
 use yii\grid\GridView;
 use yii\bootstrap\Html;
