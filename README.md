@@ -1,7 +1,7 @@
 
 Yii2-reportgrid
 ===============
-Yii-Framework extension for reporting with totals and sub-totals.  It supports export to CSV as well.  Ther is no limit to the number of sub-totalling levels that you can have. You can also defer a sub-total or total to be displayed at the bottom of the grid in the Footer.
+Yii-Framework extension for reporting with totals and sub-totals.  It supports export to CSV as well.  There is no limit to the number of sub-totalling levels that you can have. You can also defer a sub-total or total to be displayed at the bottom of the grid in the Footer.
 
 Warning
 -------
@@ -34,6 +34,7 @@ This extension is powerful reporting gridview.  Unlike other totalling girdviews
 
 Once the extension is installed, use it like a normal gridview with a few extra options.
 
+```
 echo ReportGrid::widget([
         'dataProvider' => $dataProvider,
         'controlBreak' => true,
@@ -55,7 +56,8 @@ echo ReportGrid::widget([
                'subTotal' => [
                    // note break level on closure
                    // useful for headings on break levels
-                   // eg: function($model, $key, $index, $widget, $break) { if ($break==0) return 'Report Totals' ; elseif ($break==1) return 'Break 1 Totals'; .... }
+                   // eg: function($model, $key, $index, $widget, $break) { if ($break==0) return 'Report Totals' ; 
+                   //                                                       elseif ($break==1) return 'Break 1 Totals'; .... }
                    'value' => string|attribute name|closure ~ function($model, $key, $index, $widget, $break) {}
                    'breakValue' => string|attribute name|closure ~ function($model, $key, $index, $widget, $break) {}
                    'showOnBreak => (int) break level,
@@ -68,9 +70,6 @@ echo ReportGrid::widget([
        ]
       ...
     ]);
+```
     
 You can see working demos at: [not yet available]
-=======
-# yii2-reportgrid
-A reporting gridview with built in totals and sub-totalling
->>>>>>> decd5363d166276d805a8c9a2211bc0eb84098c8
