@@ -143,7 +143,7 @@ class ReportColumn extends \yii\grid\DataColumn {
     }
 
 
-    public function renderTotalContent($break, $i, $value = Null)
+    public function renderTotalContent($break, $i, $value = Null, $model, $key, $index )
     {
         $breakParams = $this->subTotal;
              
@@ -155,8 +155,10 @@ class ReportColumn extends \yii\grid\DataColumn {
                 $content = $this->renderTotalBreakdown($break, $i);
             } elseif ($value) {
                 $content =  $this->format($value);
-            } else {
+            } elseif (!empty($this->grid->subTotal[$break][$i])) {
                 $content =  $this->format($this->grid->subTotal[$break][$i]);
+            } else {
+                $content =  $this->getValue($this->value, $model, $key, $index, $break);
             }
         }
         

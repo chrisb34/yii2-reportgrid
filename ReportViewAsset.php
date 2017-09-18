@@ -20,6 +20,10 @@ use yii\web\AssetBundle;
  */
 class ReportViewAsset extends AssetBundle
 {
+    public $depends = [
+            'yii\web\YiiAsset',
+    ];
+    
 
     /**
      * @inheritdoc

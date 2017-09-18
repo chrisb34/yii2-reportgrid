@@ -49,7 +49,7 @@ class ReportGrid extends GridView {
      *              'format' =>
      *              'totalMethod' => ReportColumn::TOTAL_BREAKDOWN,
      *              'totalOn' => string|attribute name|closure ~ function($model, $key, $index, $widget, $break) { return $model->attribute;  },
-     *                      
+ *                  'total'  
      *          ]
      *      ],
      *      
@@ -67,7 +67,7 @@ class ReportGrid extends GridView {
      */
     public $totalsHeader;
     
-    public $controlBreak;
+    public $controlBreak = true;
     public $subTotal;
     public $subBreakdown;
     public $exportCSV;
@@ -78,7 +78,7 @@ class ReportGrid extends GridView {
     private $_zeroTotals;
     private $_cells = [];
     
-    public $dataColumnClass = '\common\components\ReportGrid\ReportColumn';
+    public $dataColumnClass = 'chrisb34\ReportGrid\ReportColumn';
 
     public function init()
     {
@@ -88,6 +88,7 @@ class ReportGrid extends GridView {
         } elseif (is_array($this->formatter)) {
             $this->formatter = Yii::createObject($this->formatter);
         }
+        $this->dataProvider->pagination=false;
         //var_dump( $this->formatter );
         //if (!$this->formatter instanceof \Formatter) {
         //    throw new InvalidConfigException('The "formatter" property must be either a Format object or a configuration array.');
@@ -292,7 +293,9 @@ public function renderTableBody()
             else
                 $value = $sColumn->getValue($breakParams, $model, $key, $index, $break);
             
-            if (is_string($value)) {
+            //if (is_string($value)) {
+            if ($sColumn->format == 'text' || $sColumn->format=='html')
+            {
                 $this->subTotal[$break][$s] = $value;
                 return;
             }
@@ -316,6 +319,20 @@ public function renderTableBody()
                     $this->subTotal[$break][$s] += $total;
                 else 
                     $this->subTotal[$break][$s] = $total;
+            }
+            // overwrite summed value with TOTAL-SUM parameter but not for page totals
+            if ( !empty($breakParams['totalSum']) )
+            {
+                $total = $sColumn->getValue($breakParams['total'], $model, $key, $index, $break);
+                if ( $break == 0)
+                    $this->subTotal[$break][$s] += $total;
+                else {
+                    $this->subTotal[$break][$s] = 0;
+                    foreach ($breakParams['totalSum'] as $sumColumn)
+                    {
+                        $this->subTotal[$break][$s] += $this->subTotal[$break][$sumColumn];
+                    }
+                }
             }
             
     }
@@ -385,9 +402,14 @@ public function renderTableBody()
             if (!empty($breakParams['breakValue'])) 
             {
                 $value =  $column->getValue($breakParams['breakValue'],  $model, $key, $index , $break);
-                $cells[$i] =  $column->renderTotalContent( $break, $i, $value);
+                $cells[$i] =  $column->renderTotalContent( $break, $i, $value, $model, $key, $index );
+            } elseif ( !empty($column->subTotalOn) && $breakParams === true && $break != array_search($i, $this->_break)) {
+                // default to empty cell for break cells other than the break cell, unless break parameters are specified.
+                $cells[$i] =  Html::tag('td', $this->emptyCell, $options);
             } else {
-                $cells[$i] =  $column->renderTotalContent( $break, $i);
+                $value =  NULL;
+                $cells[$i] =  $column->renderTotalContent( $break, $i, $value, $model, $key, $index );
+                
             }
             
             if ( !empty($breakParams['showSummary']))
