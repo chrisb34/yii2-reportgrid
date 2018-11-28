@@ -72,4 +72,4 @@ echo ReportGrid::widget([
     ]);
 ```
     
-You can see working demos at: http://yii2.chris-backhouse.com
+You can see working demos at: http://yii2.percipero.com
